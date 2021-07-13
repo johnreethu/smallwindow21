@@ -3,9 +3,9 @@ name: "SmallWindow21 Production Deploy"
 on:
   push:
     branches: [ main ]
-  
+
 jobs:
-   build-application: 
+  build-application:
     name: "Build Application"
     runs-on: ubuntu-latest
     steps:
@@ -75,24 +75,18 @@ jobs:
             #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
             #### Terraform Validation 🤖\`${{ steps.validate.outputs.stdout }}\`
             #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
-
             <details><summary>Show Plan</summary>
-
             \`\`\`\n
             ${process.env.PLAN}
             \`\`\`
-
             </details>
-
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
-
             github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: output
             })
-
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
@@ -131,7 +125,6 @@ jobs:
         run: |
            elasticbeanstalk_app_cname=$(terraform output elasticbeanstalk_app_cname)
            echo $elasticbeanstalk_app_cname
-
   deploy:
     name: "Deploy to elastic beanstalk"
     runs-on: ubuntu-latest
