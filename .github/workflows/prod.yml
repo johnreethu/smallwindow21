@@ -2,11 +2,9 @@ name: "SmallWindow21 Production Deploy"
 
 on:
   push:
-    branches: [ main ]
-  pull:
-    branches: [ main ]
-
-jobs:
+    #branches: [ main ]
+  
+  jobs:
   build-application:
     name: "Build Application"
     runs-on: ubuntu-latest
